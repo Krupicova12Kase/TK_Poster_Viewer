@@ -13,9 +13,9 @@ Tento Python program vezme všechny čtyři části posteru na Tvořivou Kláves
 
 ### Použití programu
 
-1. Stáhněte soubor main.py a umístěte ho do složky mimo ostatní soubory (Mohlo by se stát, že by program použil jiné soubory místo posterů)
+1. Stáhněte soubor `main.py` a umístěte ho do složky mimo ostatní soubory (Mohlo by se stát, že by program použil jiné soubory místo posterů)
 2. Vložte všechny čtyři části posteru (hlavičku, levou část, pravou část a střední část) do stejné složky. Soubory nemusí být pojmenované podle příručky, program vezme vše co má koncovku .pptx
-3. Spusťte main.py. Program by měl začít převádět prezentace na PNG soubory, které následně uloží do složky output a nakonec spojí do jednoho.
+3. Spusťte `main.py`. Program by měl začít převádět prezentace na PNG soubory, které následně uloží do složky output a nakonec spojí do jednoho.
 4. Po několika sekundách by se měl ukázat celý poster
 
 
