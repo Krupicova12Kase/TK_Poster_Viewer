@@ -67,6 +67,9 @@ else:
     input()
     
 if passed:
+    if not os.path.exists("output"):
+        os.makedirs("output")
+    
     for file in os.listdir(directory):
         filename = os.fsdecode(file)
         if filename.endswith(".pptx"): 
@@ -87,8 +90,8 @@ if passed:
     h = p1.height + p4.height
     w = p2.width + p3.width + p4.width 
     print("")   
-    print(f"Final Image Height: {h}")
-    print(f"Final Image Width: {w}")
+    print(f"Final Image Height: {h}px")
+    print(f"Final Image Width: {w}px")
     print("") 
     #boxes
     #(horni sirka, horni vyska)
