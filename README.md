@@ -18,7 +18,8 @@ Tento Python program vezme všechny čtyři části posteru na Tvořivou Kláves
 3. Spusťte `main.py`. Program by měl začít převádět prezentace na PNG soubory, které následně uloží do složky output a nakonec spojí do jednoho.
 4. Po několika sekundách by se měl ukázat celý poster
 
+#### Nastavení
 
+Na začátku souboru je pod komentářem `#settings` nastavení.
 
-
-
+1. `close_powerpoint` - Když je hodnota nastavena na `True`, tak zavře aplikaci powerpoint po každém použití. Pokud aktivně pracujete s aplikací, je lepší toto nastavit na `False`, neboli vypnuto. Pokud program nezavře powerpoint po použití, tak bude stále aktivní, což by mohlo způsobit problémy.

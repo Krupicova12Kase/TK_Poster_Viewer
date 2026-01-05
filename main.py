@@ -4,6 +4,7 @@
 # MIT license 
 # Copyright (c) 2026 Krupicova12Kase
 ################################################################################
+
 #settings
 close_powerpoint = True #Should the program close powerpoint when it's done with generating? Not closing it may cause some problems
 
