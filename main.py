@@ -4,6 +4,8 @@
 # MIT license 
 # Copyright (c) 2026 Krupicova12Kase
 ################################################################################
+#settings
+close_powerpoint = True #Should the program close powerpoint when it's done with generating? Not closing it may cause some problems
 
 #Imports
 import win32com.client
@@ -42,17 +44,20 @@ def export_slide(pptx_path, output_folder,file):
     
     # Clean up
     presentation.Close()
-    ppt_app.Quit()
+    if close_powerpoint:
+        ppt_app.Quit()
     print(f"Exported to: {bcolors.OKBLUE}{output_path}{bcolors.ENDC}")
 
 directory = os.fsencode(os.path.dirname(os.path.abspath(__file__)))
 
+#Check if files are valid
 x = 0
 for file in os.listdir(directory):
     filename = os.fsdecode(file)
     if filename.endswith(".pptx"): 
         x += 1
 
+#Print error message when files are invalid
 if x == 4:
     print(f"{bcolors.OKGREEN}Found {4} .pptx files, attempting conversion{bcolors.ENDC}")
     passed = True
@@ -70,6 +75,7 @@ if passed:
     if not os.path.exists("output"):
         os.makedirs("output")
     
+    #Generate Images
     for file in os.listdir(directory):
         filename = os.fsdecode(file)
         if filename.endswith(".pptx"): 
