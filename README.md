@@ -19,7 +19,6 @@ Tento Python program vezme všechny čtyři části posteru na Tvořivou Kláves
 4. Po několika sekundách by se měl ukázat celý poster
 
 #### Nastavení
-
-Na začátku souboru je pod komentářem `#settings` nastavení.
+Otevřte `main.py` v poznámkovém bloku nebo lépe VS Code (NE VE WORDU). Na začátku souboru najdete pod komentářem `#settings` nastavení. 
 
 1. `close_powerpoint` - Když je hodnota nastavena na `True`, tak zavře aplikaci powerpoint po každém použití. Pokud aktivně pracujete s aplikací, je lepší toto nastavit na `False`, neboli vypnuto. Pokud program nezavře powerpoint po použití, tak bude stále aktivní, což by mohlo způsobit problémy.
