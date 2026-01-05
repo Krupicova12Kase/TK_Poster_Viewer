@@ -21,4 +21,4 @@ Tento Python program vezme všechny čtyři části posteru na Tvořivou Kláves
 #### Nastavení
 Otevřte `main.py` v poznámkovém bloku nebo lépe VS Code (NE VE WORDU). Na začátku souboru najdete pod komentářem `#settings` nastavení. 
 
-1. `close_powerpoint` - Když je hodnota nastavena na `True`, tak zavře aplikaci powerpoint po každém použití. Pokud aktivně pracujete s aplikací, je lepší toto nastavit na `False`, neboli vypnuto. Pokud program nezavře powerpoint po použití, tak bude stále aktivní, což by mohlo způsobit problémy.
+1. `close_powerpoint` - Když je hodnota nastavena na `True`, tak program zavře aplikaci powerpoint po každém použití. Pokud aktivně pracujete s aplikací, je lepší toto nastavit na `False`, neboli vypnuto. Pokud program nezavře powerpoint po použití, tak bude stále aktivní, což by mohlo způsobit problémy.
