@@ -26,3 +26,4 @@ Otevřte `main.py` v poznámkovém bloku nebo lépe VS Code (NE VE WORDU). Na za
 Na začátku souboru je pod komentářem `#settings` nastavení.
 
 1. `close_powerpoint` - Když je hodnota nastavena na `True`, tak zavře aplikaci powerpoint po každém použití. Pokud aktivně pracujete s aplikací, je lepší toto nastavit na `False`, neboli vypnuto. Pokud program nezavře powerpoint po použití, tak bude stále aktivní, což by mohlo způsobit problémy.
+2. `install_modules` - Když je hodnota nastavena na `True`, automaticky se pomocí PIP instalují potřebné moduly k funkčnosti programu. Nastavte na `False` pro vypnutí automatické instalace.
