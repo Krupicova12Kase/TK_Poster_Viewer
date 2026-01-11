@@ -7,6 +7,7 @@ Tento Python program vezme všechny čtyři části posteru na Tvořivou Kláves
 ### Instalace Pythonu a knihoven
 
 1. Nainstalujte [Python](https://www.python.org/downloads/), program byl vytvořen a testován na verzi 3.14
+Pokud máte `install_modules` nastaveno na výchozí hodnotu (`True`), instalace je hotová. Pokud nechcete automaticky nainstalovat moduly (viz. Nastavení), pokračujte krokem 2.
 2. Otevřte terminál (Na Windows stiskněte Win+R, napiště cmd a stiskněte Enter) pro nainstalování potřebných knihoven pomocí pip
 3. Do terminálu napiště `pip install --upgrade pypiwin32` pro instalování knihovny win32con
 4. Nakonec napiště `pip install --upgrade pillow` pro instalování knihovny Pillow, terminál můžete zavřít
@@ -23,3 +24,4 @@ Tento Python program vezme všechny čtyři části posteru na Tvořivou Kláves
 Na začátku souboru je pod komentářem `#settings` nastavení.
 
 1. `close_powerpoint` - Když je hodnota nastavena na `True`, tak zavře aplikaci powerpoint po každém použití. Pokud aktivně pracujete s aplikací, je lepší toto nastavit na `False`, neboli vypnuto. Pokud program nezavře powerpoint po použití, tak bude stále aktivní, což by mohlo způsobit problémy.
+2. `install_modules` - Když je hodnota nastavena na `True`, automaticky se pomocí PIP instalují potřebné moduly k funkčnosti programu. Nastavte na `False` pro vypnutí automatické instalace.

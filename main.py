@@ -7,14 +7,17 @@
 
 #settings
 close_powerpoint = True #Should the program close powerpoint when it's done with generating? Not closing it may cause some problems
+install_modules = True #Should the program install required packages? Packages are on line below
+packages = ["pillow","pywin32"]
 
 #Imports
 import win32com.client
 import os
 from PIL import Image
+import time
+import subprocess
+import sys
 
-names = [] 
-passed = False
 #Thank you stackoverflow https://stackoverflow.com/questions/287871/how-do-i-print-colored-text-to-the-terminal
 class bcolors:
     HEADER = '\033[95m'
@@ -26,29 +29,38 @@ class bcolors:
     ENDC = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
+    
+#Module instalation and update
+def update(module):
+    subprocess.check_call([sys.executable, "-m", "pip", "install",module])
+if install_modules:
+    try:
+        for i in packages:
+            update(i)
+    except:
+        print(f"{bcolors.WARNING}Failed to install packages!{bcolors.ENDC}")
+    
+names = [] 
+passed = False
+
  
 #Gemini helped with this powerpoint stuff   
-def export_slide(pptx_path, output_folder,file):
-    # Initialize PowerPoint
-    ppt_app = win32com.client.Dispatch("PowerPoint.Application")
-    
+def export_slide(ppt_app,pptx_path, output_folder,file):      
     # Open the presentation
     abs_path = os.path.abspath(pptx_path)
     presentation = ppt_app.Presentations.Open(abs_path, WithWindow=False)
-    
+    time.sleep(1)
     # Export the first slide (Index starts at 1)
     slide = presentation.Slides(1)
     output_path = os.path.join(os.path.abspath(output_folder), file)
     
     # Export method (FileName, FilterName, Width, Height)
     slide.Export(output_path, "PNG")
-    
-    # Clean up
-    presentation.Close()
-    if close_powerpoint:
-        ppt_app.Quit()
     print(f"Exported to: {bcolors.OKBLUE}{output_path}{bcolors.ENDC}")
 
+    #Clean up
+    presentation.Close()
+    
 directory = os.fsencode(os.path.dirname(os.path.abspath(__file__)))
 
 #Check if files are valid
@@ -68,7 +80,7 @@ elif x > 4 or x < 4:
     passed = False
     input()
 else:
-    print(f"{bcolors.FAIL}Something strange happened during checking amount of .pptx files, make sure there are exactly four! (found {x})If yes, open an issue on GitHub{bcolors.ENDC}")
+    print(f"{bcolors.FAIL}Something strange happened during checking amount of .pptx files, make sure there are exactly four! (found {x})If there are exactly four, open an issue on GitHub{bcolors.ENDC}")
     passed = False
     input()
     
@@ -77,16 +89,27 @@ if passed:
         os.makedirs("output")
     
     #Generate Images
-    for file in os.listdir(directory):
-        filename = os.fsdecode(file)
-        if filename.endswith(".pptx"): 
-            name = filename[:filename.rfind(".")]
-            img = Image.new("RGB", (64,64),(255,255,255))
-            img.save("output/" + name + ".png", "PNG")
-            export_slide(filename,"output",name + ".png")
-            names.append(str("output/"+name + ".png"))
-            print(f"{bcolors.OKGREEN}Presentation converted successfully!{bcolors.ENDC}")
-
+    try:
+        ppt_app = win32com.client.DispatchEx("PowerPoint.Application")       
+        for file in os.listdir(directory):
+            filename = os.fsdecode(file)
+            if filename.endswith(".pptx"): 
+                name = filename[:filename.rfind(".")]
+                img = Image.new("RGB", (64,64),(255,255,255))
+                img.save("output/" + name + ".png", "PNG")
+                
+                #Powerpoint stuff 
+                export_slide(ppt_app,filename,"output",name + ".png")
+                names.append(str("output/"+name + ".png"))
+                print(f"{bcolors.OKGREEN}Presentation converted successfully!{bcolors.ENDC}")
+    finally:
+        time.sleep(1)
+        try:
+            if close_powerpoint:
+                ppt_app.Quit()
+        except:
+            pass
+        
     #Open Images
     p1 = Image.open(names[0]).convert("RGBA")
     p2 = Image.open(names[1]).convert("RGBA")
