@@ -7,10 +7,11 @@ Tento Python program vezme všechny čtyři části posteru na Tvořivou Kláves
 ### Instalace Pythonu a knihoven
 
 1. Nainstalujte [Python](https://www.python.org/downloads/), program byl vytvořen a testován na verzi 3.14
-Pokud máte `install_modules` nastaveno na výchozí hodnotu (`True`), instalace je hotová. Pokud nechcete automaticky nainstalovat moduly (viz. Nastavení), pokračujte krokem 2.
-2. Otevřte terminál (Na Windows stiskněte Win+R, napiště cmd a stiskněte Enter) pro nainstalování potřebných knihoven pomocí pip
-3. Do terminálu napiště `pip install --upgrade pypiwin32` pro instalování knihovny win32con
-4. Nakonec napiště `pip install --upgrade pillow` pro instalování knihovny Pillow, terminál můžete zavřít
+2. Pokud máte `install_modules` v programu nastaveno na výchozí hodnotu (`True`), spusťte program.
+Program automaticky nainstaluje potřebné knihovny. Tímto je instalace hotová. Pokud nechcete automaticky instalovat moduly (viz. Nastavení), pokračujte krokem 3.
+3. Otevřte terminál (Na Windows stiskněte Win+R, napiště cmd a stiskněte Enter) pro nainstalování potřebných knihoven pomocí pip
+4. Do terminálu napiště `pip install --upgrade pypiwin32` pro instalování knihovny win32con
+5. Nakonec napiště `pip install --upgrade pillow` pro instalování knihovny Pillow, terminál můžete zavřít
 
 ### Použití programu
 
