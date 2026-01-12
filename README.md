@@ -1,5 +1,6 @@
 # Prohlížeč posterů na TK
 
+<h3 style="color : Red">Program zatím nepodporuje jiný operační systém než windows z důvodu nedostupnosti pywin32 (win32com) knihovny! </h3>
 Tento Python program vezme všechny čtyři části posteru na Tvořivou Klávesnici a spojí je do jednoho .png souboru, který následně zobrazí. Konverze do PNG trbá jen pár sekund a s originálními .pptx soubory se nic nestane, vše se uloží do složky output.
 
 ## Návod na použití
