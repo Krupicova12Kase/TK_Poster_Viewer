@@ -16,7 +16,6 @@ import os
 from PIL import Image
 import time
 import subprocess
-import sys
 
 #Thank you stackoverflow https://stackoverflow.com/questions/287871/how-do-i-print-colored-text-to-the-terminal
 class bcolors:
@@ -32,7 +31,8 @@ class bcolors:
     
 #Module instalation and update
 def update(module):
-    subprocess.check_call([sys.executable, "-m", "pip", "install",module])
+    subprocess.check_call(f'pip install {module}', shell=True)
+
 if install_modules:
     try:
         for i in packages:
@@ -61,7 +61,7 @@ def export_slide(ppt_app,pptx_path, output_folder,file):
     #Clean up
     presentation.Close()
     
-directory = os.fsencode(os.path.dirname(os.path.abspath(__file__)))
+directory = os.path.dirname(os.path.abspath(__file__))
 
 #Check if files are valid
 x = 0
@@ -99,7 +99,7 @@ if passed:
                 img.save("output/" + name + ".png", "PNG")
                 
                 #Powerpoint stuff 
-                export_slide(ppt_app,filename,"output",name + ".png")
+                export_slide(ppt_app,os.path.join(directory, filename),"output",name + ".png")
                 names.append(str("output/"+name + ".png"))
                 print(f"{bcolors.OKGREEN}Presentation converted successfully!{bcolors.ENDC}")
     finally:
