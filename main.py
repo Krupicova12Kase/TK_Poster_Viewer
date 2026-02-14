@@ -1,21 +1,22 @@
 ################################################################################
 # Report issues at https://github.com/Krupicova12Kase/TK_Poster_Viewer
 # Created by Krupicova12Kase, AKA Máťa or luki
+# Version 2.0
 # MIT license 
 # Copyright (c) 2026 Krupicova12Kase
 ################################################################################
 
 #settings
 close_powerpoint = True #Should the program close powerpoint when it's done with generating? Not closing it may cause some problems
-install_modules = True #Should the program install required packages? Packages are on line below
-packages = ["pillow","pywin32"]
+install_modules = False #Should the program install required packages? Packages are on line below
+packages = ["pillow"]
 
 #Imports
-import win32com.client
 import os
 from PIL import Image
 import time
 import subprocess
+import aspose.slides as slides
 
 #Thank you stackoverflow https://stackoverflow.com/questions/287871/how-do-i-print-colored-text-to-the-terminal
 class bcolors:
@@ -43,27 +44,17 @@ if install_modules:
 names = [] 
 passed = False
 
- 
-#Gemini helped with this powerpoint stuff   
-def export_slide(ppt_app,pptx_path, output_folder,file):      
-    # Open the presentation
-    abs_path = os.path.abspath(pptx_path)
-    presentation = ppt_app.Presentations.Open(abs_path, WithWindow=False)
-    time.sleep(1)
-    # Export the first slide (Index starts at 1)
-    slide = presentation.Slides(1)
-    output_path = os.path.join(os.path.abspath(output_folder), file)
-    
-    # Export method (FileName, FilterName, Width, Height)
-    slide.Export(output_path, "PNG")
-    print(f"Exported to: {bcolors.OKBLUE}{output_path}{bcolors.ENDC}")
-
-    #Clean up
-    presentation.Close()
-    
-directory = os.path.dirname(os.path.abspath(__file__))
+#Function to export slides
+def export_slide(file_name,output_name):
+    with slides.Presentation(file_name) as presentation:
+        slide = presentation.slides[0]
+        with slide.get_image(1,1) as image:
+            image.save(output_name, slides.ImageFormat.PNG)
+            print("saving")
 
 #Check if files are valid
+directory = os.path.dirname(os.path.abspath(__file__))
+
 x = 0
 for file in os.listdir(directory):
     filename = os.fsdecode(file)
@@ -89,26 +80,24 @@ if passed:
         os.makedirs("output")
     
     #Generate Images
-    try:
-        ppt_app = win32com.client.DispatchEx("PowerPoint.Application")       
+    try:     
         for file in os.listdir(directory):
             filename = os.fsdecode(file)
             if filename.endswith(".pptx"): 
+
                 name = filename[:filename.rfind(".")]
-                img = Image.new("RGB", (64,64),(255,255,255))
-                img.save("output/" + name + ".png", "PNG")
-                
+                #img = Image.new("RGB", (64,64),(255,255,255))
+                #img.save("output/" + name + ".png", "PNG")
+                finaldir = os.path.join(directory, filename)
                 #Powerpoint stuff 
-                export_slide(ppt_app,os.path.join(directory, filename),"output",name + ".png")
-                names.append(str("output/"+name + ".png"))
+                export_slide(finaldir,"output/"+ name + ".png")
+                names.append(str("output/"+ name + ".png"))
                 print(f"{bcolors.OKGREEN}Presentation converted successfully!{bcolors.ENDC}")
+    except Exception as e:
+        print(e)
+        input()
     finally:
         time.sleep(1)
-        try:
-            if close_powerpoint:
-                ppt_app.Quit()
-        except:
-            pass
         
     #Open Images
     p1 = Image.open(names[0]).convert("RGBA")
