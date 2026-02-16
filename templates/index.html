@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/styles.css') }}">
+    <title>nízkoklíčový poster generator</title>
+</head>
+
+<body>
+    <h1>TK Poster generator</h1>
+    <form method=post enctype=multipart/form-data>
+      <input type=file name=file>
+      <input type=submit value=Potvrdit>
+    </form>
+    <button id="submit">Run</button>
+
+    <script>
+        document.getElementById("submit").addEventListener('click', function() {
+            // Pošleme POST požadavek na náš Flask endpoint
+            fetch('/spustit-python', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Tady zpracuješ odpověď ze serveru (např. vypíšeš hlášku)
+                console.log(data.message);
+            })
+            .catch(error => {
+                console.error('An Error occured:\n', error);
+            });
+        });
+    </script>
+    <h2>Soubory</h2>
+    <div class="files">
+        {{files}}
+    </div>
+    <br>
+    <div class="poster-wrapper">
+        <img src="{{ url_for('static', filename='final_merged.png') }}" alt="merged poster" class="poster-image"></img>
+    </div>
+
+    <h1>{{message}}</h1>
+</body>
+</html>
