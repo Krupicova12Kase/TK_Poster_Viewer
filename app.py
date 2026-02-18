@@ -17,13 +17,10 @@ def display_files():
     try:
         x = 0
         for file in os.listdir(directory):
-            print(file)
             filename = os.fsdecode(file)
-            print(filename)
             if filename.endswith(".pptx"): 
                 x += 1
                 files.append(filename)
-                #files.append("<br>")
         return ("SUCCESS", files)
     except:
         return ("FAIL", files)

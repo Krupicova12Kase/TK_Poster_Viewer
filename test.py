@@ -51,8 +51,8 @@ def slides_func():
         return ("FAIL",67)
         
     if passed:
-        if not os.path.exists("output"):
-            os.makedirs("output")
+        if not os.path.exists("static/output"):
+            os.makedirs("static/output")
         
         #Generate Images
         try:     
@@ -65,8 +65,8 @@ def slides_func():
                     #img.save("output/" + name + ".png", "PNG")
                     finaldir = os.path.join(directory, filename)
                     #Powerpoint stuff 
-                    export_slide(finaldir,"output/"+ name + ".png")
-                    names.append(str("output/"+ name + ".png"))
+                    export_slide(finaldir,"static/pictures/"+ name + ".png")
+                    names.append(str("static/pictures"+ name + ".png"))
                     print(f"{bcolors.OKGREEN}Presentation converted successfully!{bcolors.ENDC}")
         except Exception as e:
             print(e)

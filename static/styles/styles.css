@@ -2,17 +2,42 @@
     --default-font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-h1{
-    font-family: var(--default-font)
-}
-h2{
-    font-family: var(--default-font)
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column; /* Celá stránka je sloupec */
+    min-height: 100vh;
+    font-family: var(--default-font);
 }
 .poster-wrapper {
     width: 50%;
     margin: 0 auto;
 }
+.top-bar {
+    background: #818181;
+    color: white;
+    padding: 20px;
+    /* Navigace prostě zabere 100% šířky automaticky */
+}
+.bottom-stuff {
+    display: flex !important;   /* !important zajistí, že to nic jiného nepřepíše */
+    flex-direction: row;       /* Explicitně říkáme: buďte vedle sebe v řádku */
+    width: 100%;               /* Musí zabrat celou šířku */
+    align-items: flex-start;   /* Zarovná prvky k hornímu okraji */
+}
+.control-panel {
+    width: 350px;       /* Pevná šířka levého panelu */
+    background: #ecf0f1;
+    padding: 20px;
+}
 
+.final-image {
+    flex: 1;            /* "flex: 1" znamená: zaber veškerý zbývající prostor */
+    display: flex;
+    justify-content: center; /* Vycentruje obrázek vodorovně */
+    align-items: center;     /* Vycentruje obrázek svisle */
+    padding: 20px;
+}
 .poster-image {
     width: 100%;
     height: auto;
@@ -20,30 +45,10 @@ h2{
 .files{
     font-family: var(--default-font);
 }
-
-.flex-container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: normal;
-  align-items: normal;
-  align-content: normal;
+.parent {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    gap: 8px;
 }
-
-.flex-items:nth-child(1) {
-  display: block;
-  flex-grow: 0.2;
-  flex-shrink: 1;
-  flex-basis: auto;
-  align-self: auto;
-  order: 0;
-}
-
-.flex-items:nth-child(2) {
-  display: block;
-  flex-grow: 0.8;
-  flex-shrink: 1;
-  flex-basis: auto;
-  align-self: auto;
-  order: 0;
-}
+        
