@@ -17,9 +17,13 @@ def display_files():
     try:
         x = 0
         for file in os.listdir(directory):
+            print(file)
             filename = os.fsdecode(file)
+            print(filename)
             if filename.endswith(".pptx"): 
                 x += 1
+                files.append(filename)
+                #files.append("<br>")
         return ("SUCCESS", files)
     except:
         return ("FAIL", files)
@@ -43,6 +47,7 @@ def upload_file():
             flash('No selected file')
             return redirect(request.url)
         if file and allowed_file(file.filename):
+            #file.filename = "test.pptx"
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             return redirect(url_for('upload_file', name=filename))
@@ -56,9 +61,13 @@ def upload_file():
 def spustit_python():
     import test
     test.slides_func()
-    
-    
+
     # Vrátíme JSON, aby JavaScript věděl, že se to povedlo
     return jsonify(status="success", message="Funkce proběhla na serveru.")
-if __name__ == "__main__":
-    app.run(debug=True)
+try:
+    if __name__ == "__main__":
+        app.run(debug=True)
+except KeyboardInterrupt:
+    print("App canceled")
+except Exception as e:
+    print(e)
