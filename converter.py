@@ -65,8 +65,8 @@ def slides_func():
                     #img.save("output/" + name + ".png", "PNG")
                     finaldir = os.path.join(directory, filename)
                     #Powerpoint stuff 
-                    export_slide(finaldir,"static/pictures/"+ name + ".png")
-                    names.append(str("static/pictures"+ name + ".png"))
+                    export_slide(finaldir,"static/output/"+ name + ".png")
+                    names.append(str("static/output/"+ name + ".png"))
                     print(f"{bcolors.OKGREEN}Presentation converted successfully!{bcolors.ENDC}")
         except Exception as e:
             print(e)
@@ -104,13 +104,6 @@ def slides_func():
 
         #Displaying and saving
         fimg.save("static/" + "final_merged" + ".png", "PNG")
-        save = fimg.show()
-        savei = input("Save the image? (y/n) ").lower()
-        if savei == "y" or savei == "yes":
-            fimg.save("static/" + "final_merged" + ".png", "PNG")
-            print(f"{bcolors.OKGREEN}Saved successfully!{bcolors.ENDC}")
-        else:
-            print("Not saving")
         return ("SUCCESS",fimg)
 
 #slides_func()

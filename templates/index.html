@@ -10,38 +10,28 @@
 <body>
     <!-- Top bar -->
     <div class="top-bar">
-        test
+        
     </div>
     <!-- Bottom stuff -->
     <div class = "bottom-stuff">
     <!-- Left bar -->
         <div class="control-panel">
             <h1>TK Poster generator</h1>
-            <form method=post enctype=multipart/form-data>
-                <input type=file name=file>
-                <input type=submit value=Potvrdit>
-            </form>
-            <button id="submit">Run</button>
+            <form method=post enctype=multipart/form-data>  
+                <label for="hlavicka">Horní část: </label>
+                <input type=file name=hlavicka >
 
-            <script>
-                // Some javascript stuff idk javascript
-                document.getElementById("submit").addEventListener('click', function() {
-                    fetch('/spustit-python', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-            
-                        console.log(data.message);
-                    })
-                    .catch(error => {
-                        console.error('An Error occured:\n', error);
-                    });
-                });
-            </script>
+                <label for="prava">Pravá část: </label>
+                <input type=file name=prava>
+
+                <label for="stred">Střední část: </label>
+                <input type=file name=stred>
+
+                <label for="leva">Levá část: </label>
+                <input type=file name=leva>
+                
+                <input type=submit value=Nahrát>
+            </form>
 
             <!-- list souborů -->
             <h2>Soubory</h2>
@@ -60,6 +50,6 @@
             </div>
         </div>
     </div>
-    <!--- <h1>{{message}}</h1> --->
+    <!-- <h1>{{message}}</h1> -->
 </body>
 </html>
