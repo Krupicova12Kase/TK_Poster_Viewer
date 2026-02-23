@@ -23,8 +23,17 @@ def slides_func():
     #Function to export slides
     def export_slide(file_name,output_name):
         with slides.Presentation(file_name) as presentation:
+            options = slides.export.RenderingOptions()
+    
+            # Zkusíme vynutit použití vložených písem
+            # Aspose by je mělo brát automaticky, ale můžeme zkontrolovat, co vidí
+            x = 0
+            for font in presentation.fonts_manager.get_embedded_fonts():
+                print(f"Nalezen vložený font: {font.font_name}")
+                x = x + 1
+            print(x)
             slide = presentation.slides[0]
-            with slide.get_image(1,1) as image:
+            with slide.get_image(options,1,1) as image:
                 image.save(output_name, slides.ImageFormat.PNG)
                 print("saving")
 
@@ -59,10 +68,7 @@ def slides_func():
             for file in os.listdir(directory):
                 filename = os.fsdecode(file)
                 if filename.endswith(".pptx"): 
-
                     name = filename[:filename.rfind(".")]
-                    #img = Image.new("RGB", (64,64),(255,255,255))
-                    #img.save("output/" + name + ".png", "PNG")
                     finaldir = os.path.join(directory, filename)
                     #Powerpoint stuff 
                     export_slide(finaldir,"static/output/"+ name + ".png")
@@ -75,10 +81,11 @@ def slides_func():
         time.sleep(1)
             
         #Open Images
-        p1 = Image.open(names[0]).convert("RGBA")
-        p2 = Image.open(names[1]).convert("RGBA")
-        p3 = Image.open(names[2]).convert("RGBA")
-        p4 = Image.open(names[3]).convert("RGBA")
+        print(names)
+        p1 = Image.open("static/output/"+ "hlavicka" + ".png").convert("RGBA")
+        p2 = Image.open("static/output/"+ "leva" + ".png").convert("RGBA")
+        p3 = Image.open("static/output/"+ "prava" + ".png").convert("RGBA")
+        p4 = Image.open("static/output/"+ "stred" + ".png").convert("RGBA")
 
         #Calculate the width and height 
         h = p1.height + p4.height

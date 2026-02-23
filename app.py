@@ -37,8 +37,6 @@ def upload_file():
     if request.method == 'POST':
         print("method")
         # check if the post request has the file part
-        # If the user does not select a file, the browser submits an
-        # empty file without a filename.
         for name in REQUEST_NAMES:
             print("loop " + str(name))
             if name not in request.files:
@@ -46,6 +44,7 @@ def upload_file():
                 print(f"Request part {name} is not in the provided request!")
                 return redirect(request.url)
             file = request.files[name]
+            # If the user does not select a file, the browser submits an empty file without a filename.
             if file.filename == '':
                 flash('No selected file')
                 print('No selected file')
@@ -53,10 +52,6 @@ def upload_file():
             file.filename = name + ".pptx"
 
             print("idk1")
-
-            print(allowed_file(file.filename))
-            print(file)
-            print(file and allowed_file(file.filename))
 
             if file and allowed_file(file.filename):
 
@@ -77,10 +72,6 @@ def upload_file():
     else:
         return render_template("index.html", message="Test",files="Failed to load files")
     
-try:
-    if __name__ == "__main__":
-        app.run(debug=False)
-except KeyboardInterrupt:
-    print("App canceled")
-except Exception as e:
-    print(e)
+
+if __name__ == "__main__":
+    app.run(debug=True)
